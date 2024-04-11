@@ -1,0 +1,5 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+UNDEPLOY IF EXISTS WEBSERVICE av_promotion;
+
+DEPLOY WEBSERVICE av_promotion LOGIN = '${databases.edw_tpcds.webcontainer.webservices.av_promotion.LOGIN}' PASSWORD = '${databases.edw_tpcds.webcontainer.webservices.av_promotion.PASSWORD}' ${databases.edw_tpcds.webcontainer.webservices.av_promotion.PASSWORD.ENCRYPTED};
+

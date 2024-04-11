@@ -1,0 +1,9 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE DATASOURCE JSON marketing_service
+    FOLDER = '/01 - connectivity layer/01 - data sources'
+    ROUTE HTTP 'http.CommonsHttpClientConnection,120000' GET '${databases.edw_tpcds.folder.01 - connectivity layer.folder.01 - data sources.datasources.json.marketing_service.ROUTE.HTTP.URL}'
+    AUTHENTICATION BASIC ( 
+      USER '${databases.edw_tpcds.folder.01 - connectivity layer.folder.01 - data sources.datasources.json.marketing_service.ROUTE.HTTP.USER}'
+      PASSWORD '${databases.edw_tpcds.folder.01 - connectivity layer.folder.01 - data sources.datasources.json.marketing_service.ROUTE.HTTP.PASSWORD}' ${databases.edw_tpcds.folder.01 - connectivity layer.folder.01 - data sources.datasources.json.marketing_service.ROUTE.HTTP.PASSWORD.ENCRYPTED} )
+    PROXY OFF;
+

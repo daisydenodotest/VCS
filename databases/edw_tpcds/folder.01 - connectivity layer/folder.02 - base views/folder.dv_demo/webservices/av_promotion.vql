@@ -1,0 +1,39 @@
+﻿CREATE OR REPLACE REST WEBSERVICE av_promotion
+    CONNECTION (
+        CHUNKSIZE = 1000
+        CHUNKTIMEOUT = 90000
+        QUERYTIMEOUT = 900000
+        POOLENABLED = true
+        POOLINITSIZE = 0
+        POOLMAXACTIVE = 30
+    )
+    DEFAULTREPRESENTATION = HTML
+    SUPPORTEDREPRESENTATIONS (HTML, XML, JSON)
+    RESOURCES (
+        VIEW bv_promotion FIELDS (
+            p_promo_sk : 'decimal', 
+            p_promo_id : 'text', 
+            p_start_date_sk : 'decimal', 
+            p_end_date_sk : 'decimal', 
+            p_item_sk : 'decimal', 
+            p_cost : 'decimal', 
+            p_response_target : 'decimal', 
+            p_promo_name : 'text', 
+            p_channel_dmail : 'text', 
+            p_channel_email : 'text', 
+            p_channel_catalog : 'text', 
+            p_channel_tv : 'text', 
+            p_channel_radio : 'text', 
+            p_channel_press : 'text', 
+            p_channel_event : 'text', 
+            p_channel_demo : 'text', 
+            p_channel_details : 'text', 
+            p_purpose : 'text', 
+            p_discount_active : 'text'
+        )
+    )
+    OPTIONS ( NULLVALUESASEMPTYXMLELEMENTS = false
+        PROCESS_FUNCTIONS_IN_SELECT_PARAMETER = true ) 
+    OPENAPI2 ( API_VERSION = '1.0.0' ) 
+    FOLDER = '/01 - connectivity layer/02 - base views/dv_demo';
+

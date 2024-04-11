@@ -1,0 +1,84 @@
+﻿CREATE OR REPLACE WRAPPER JSON "marketing_service_662a7a50-ae85-4ab2-b9c2-ceac843d6685"
+    FOLDER = '/01 - connectivity layer/02 - base views/dv_demo'
+    DATASOURCENAME=marketing_service
+    TUPLEROOT '/JSONFile/elements'
+    OUTPUTSCHEMA ("JSONFile" = 'JSONFile' : REGISTER OF (
+        name = 'name' : 'java.lang.String',
+        p_promo_sk = 'JSONFile.elements.p_promo_sk' : 'java.lang.Integer',
+        p_promo_id = 'JSONFile.elements.p_promo_id' : 'java.lang.String',
+        p_start_date_sk = 'JSONFile.elements.p_start_date_sk' : 'java.lang.Integer',
+        p_end_date_sk = 'JSONFile.elements.p_end_date_sk' : 'java.lang.Integer',
+        p_item_sk = 'JSONFile.elements.p_item_sk' : 'java.lang.Integer',
+        p_cost = 'JSONFile.elements.p_cost' : 'java.lang.Integer',
+        p_response_target = 'JSONFile.elements.p_response_target' : 'java.lang.Integer',
+        p_promo_name = 'JSONFile.elements.p_promo_name' : 'java.lang.String',
+        p_channel_dmail = 'JSONFile.elements.p_channel_dmail' : 'java.lang.String',
+        p_channel_email = 'JSONFile.elements.p_channel_email' : 'java.lang.String',
+        p_channel_catalog = 'JSONFile.elements.p_channel_catalog' : 'java.lang.String',
+        p_channel_tv = 'JSONFile.elements.p_channel_tv' : 'java.lang.String',
+        p_channel_radio = 'JSONFile.elements.p_channel_radio' : 'java.lang.String',
+        p_channel_press = 'JSONFile.elements.p_channel_press' : 'java.lang.String',
+        p_channel_event = 'JSONFile.elements.p_channel_event' : 'java.lang.String',
+        p_channel_demo = 'JSONFile.elements.p_channel_demo' : 'java.lang.String',
+        p_channel_details = 'JSONFile.elements.p_channel_details' : 'java.lang.String',
+        p_purpose = 'JSONFile.elements.p_purpose' : 'java.lang.String',
+        p_discount_active = 'JSONFile.elements.p_discount_active' : 'java.lang.String'
+    )
+    );
+
+CREATE OR REPLACE TABLE bv_marketing_service I18N us_cst (
+        name:text,
+        p_promo_sk:int,
+        p_promo_id:text,
+        p_start_date_sk:int,
+        p_end_date_sk:int,
+        p_item_sk:int,
+        p_cost:int,
+        p_response_target:int,
+        p_promo_name:text,
+        p_channel_dmail:text,
+        p_channel_email:text,
+        p_channel_catalog:text,
+        p_channel_tv:text,
+        p_channel_radio:text,
+        p_channel_press:text,
+        p_channel_event:text,
+        p_channel_demo:text,
+        p_channel_details:text,
+        p_purpose:text,
+        p_discount_active:text
+    )
+    FOLDER = '/01 - connectivity layer/02 - base views/dv_demo'
+    CACHE OFF
+    BATCHSIZEINCACHE DEFAULT
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD marketing_service(
+        I18N us_cst
+        CONSTRAINTS (
+             ADD name NOS ZERO ()
+             ADD p_promo_sk NOS ZERO ()
+             ADD p_promo_id NOS ZERO ()
+             ADD p_start_date_sk NOS ZERO ()
+             ADD p_end_date_sk NOS ZERO ()
+             ADD p_item_sk NOS ZERO ()
+             ADD p_cost NOS ZERO ()
+             ADD p_response_target NOS ZERO ()
+             ADD p_promo_name NOS ZERO ()
+             ADD p_channel_dmail NOS ZERO ()
+             ADD p_channel_email NOS ZERO ()
+             ADD p_channel_catalog NOS ZERO ()
+             ADD p_channel_tv NOS ZERO ()
+             ADD p_channel_radio NOS ZERO ()
+             ADD p_channel_press NOS ZERO ()
+             ADD p_channel_event NOS ZERO ()
+             ADD p_channel_demo NOS ZERO ()
+             ADD p_channel_details NOS ZERO ()
+             ADD p_purpose NOS ZERO ()
+             ADD p_discount_active NOS ZERO ()
+        )
+        OUTPUTLIST (name, p_channel_catalog, p_channel_demo, p_channel_details, p_channel_dmail, p_channel_email, p_channel_event, p_channel_press, p_channel_radio, p_channel_tv, p_cost, p_discount_active, p_end_date_sk, p_item_sk, p_promo_id, p_promo_name, p_promo_sk, p_purpose, p_response_target, p_start_date_sk
+        )
+        WRAPPER (json "marketing_service_662a7a50-ae85-4ab2-b9c2-ceac843d6685")
+    )
+    ATSOURCE_THROUGH_VDP_ONLY;
+

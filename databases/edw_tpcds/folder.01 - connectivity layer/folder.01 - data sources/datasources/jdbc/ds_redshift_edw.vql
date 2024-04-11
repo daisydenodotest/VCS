@@ -1,0 +1,45 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE DATASOURCE JDBC ds_redshift_edw
+    FOLDER = '/01 - connectivity layer/01 - data sources'
+    DRIVERCLASSNAME = 'com.amazon.redshift.jdbc41.Driver'
+    DATABASEURI = '${databases.edw_tpcds.folder.01 - connectivity layer.folder.01 - data sources.datasources.jdbc.ds_redshift_edw.DATABASEURI}'
+    USERNAME = '${databases.edw_tpcds.folder.01 - connectivity layer.folder.01 - data sources.datasources.jdbc.ds_redshift_edw.USERNAME}'
+    USERPASSWORD = '${databases.edw_tpcds.folder.01 - connectivity layer.folder.01 - data sources.datasources.jdbc.ds_redshift_edw.USERPASSWORD}' ${databases.edw_tpcds.folder.01 - connectivity layer.folder.01 - data sources.datasources.jdbc.ds_redshift_edw.USERPASSWORD.ENCRYPTED}
+    CLASSPATH = 'amazon-redshift'
+    DATABASENAME = 'redshift'
+    DATABASEVERSION = '2015'
+    FETCHSIZE = 1000
+    VALIDATIONQUERY = 'Select 1'
+    INITIALSIZE = 4
+    MAXIDLE = -1
+    MINIDLE = 0
+    MAXACTIVE = 20
+    EXHAUSTEDACTION = 1
+    TESTONBORROW = true
+    TESTONRETURN = false
+    TESTWHILEIDLE = false
+    TIMEBETWEENEVICTION = -1
+    NUMTESTPEREVICTION = 3
+    MINEVICTABLETIME = 1800000
+    POOLPREPAREDSTATEMENTS = false
+    MAXOPENPREPAREDSTATEMENTS = 8
+    DATA_LOAD_CONFIGURATION (
+        USE_FOR_QUERY_OPTIMIZATION = DATA_MOVEMENT
+        BATCHINSERTSIZE = 500000
+        BULK_LOAD_CONFIGURATION (
+            AWS_ACCESS_KEY_ID = '${databases.edw_tpcds.folder.01 - connectivity layer.folder.01 - data sources.datasources.jdbc.ds_redshift_edw.AWS_ACCESS_KEY_ID}'
+            AWS_SECRET_ACCESS_KEY = '${databases.edw_tpcds.folder.01 - connectivity layer.folder.01 - data sources.datasources.jdbc.ds_redshift_edw.AWS_SECRET_ACCESS_KEY}' ${databases.edw_tpcds.folder.01 - connectivity layer.folder.01 - data sources.datasources.jdbc.ds_redshift_edw.AWS_SECRET_ACCESS_KEY.ENCRYPTED}
+            S3_BUCKET_NAME = '${databases.edw_tpcds.folder.01 - connectivity layer.folder.01 - data sources.datasources.jdbc.ds_redshift_edw.S3_BUCKET_NAME}'
+        )
+        USEEXTERNALTABLES ( 
+            ONMOVEREAD = false,
+            ONMOVEWRITE = true
+        )
+    )
+    PROCESSING_UNITS = 2
+    CPUS_PER_PROCESSING_UNIT = 16
+    SOURCECONFIGURATION (
+        allowliteralasparameter = true,
+        delegatescalarfunctionslist = (abs, acos, addday, addhour, addminute, addmonth, addsecond, addweek, addyear, ascii, asin, atan, atan2, case, cast, ceil, char, coalesce, concat, convert_timezone(evaluate_literal), cos, cot, current_date, degrees, div, exp, firstdayofmonth, firstdayofweek, floor, formatdate, getday, getdayofweek, getdayofyear, getdaysbetween, gethour, getmicrosecond, getmillisecond, getminute, getmonth, getmonthsbetween, getnanosecond, getquarter, getsecond, getweek, getyear, instr, lastdayofmonth, len, ln, log, lower, ltrim, max, min, mod, mult, nextweekday, now, nullif, pi, position, pow, power, previousweekday, radians, rand, regexp, removeaccents, repeat, replace, round, rownum, rtrim, sign, sin, sql_trim, sqrt, substr, substring, subtract, sum, tan, textcat, textconstant, to_date, to_localdate, to_timestamp, to_timestamptz, trim, trunc, upper)
+    );
+

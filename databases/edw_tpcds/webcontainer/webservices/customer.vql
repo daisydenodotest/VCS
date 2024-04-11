@@ -1,0 +1,5 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+UNDEPLOY IF EXISTS WEBSERVICE customer;
+
+DEPLOY WEBSERVICE customer LOGIN = '${databases.edw_tpcds.webcontainer.webservices.customer.LOGIN}' PASSWORD = '${databases.edw_tpcds.webcontainer.webservices.customer.PASSWORD}' ${databases.edw_tpcds.webcontainer.webservices.customer.PASSWORD.ENCRYPTED};
+

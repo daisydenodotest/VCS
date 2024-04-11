@@ -1,0 +1,89 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC bv_promotion
+    FOLDER = '/01 - connectivity layer/02 - base views/dv_demo'
+    DATASOURCENAME=ds_oracle_crm
+    SCHEMANAME='${databases.edw_tpcds.folder.01 - connectivity layer.folder.02 - base views.folder.dv_demo.views.jdbc.bv_promotion.SCHEMANAME}' 
+    RELATIONNAME='PROMOTION' 
+    OUTPUTSCHEMA (
+        p_promo_sk = 'P_PROMO_SK' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='38', sourcetypeid='2', sourcetypename='NUMBER')  NOT NULL SORTABLE,
+        p_promo_id = 'P_PROMO_ID' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='16', sourcetypeid='1', sourcetypename='CHAR')  NOT NULL SORTABLE,
+        p_start_date_sk = 'P_START_DATE_SK' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='38', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        p_end_date_sk = 'P_END_DATE_SK' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='38', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        p_item_sk = 'P_ITEM_SK' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='38', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        p_cost = 'P_COST' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='2', sourcetyperadix='10', sourcetypesize='15', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        p_response_target = 'P_RESPONSE_TARGET' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='38', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        p_promo_name = 'P_PROMO_NAME' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='50', sourcetypeid='1', sourcetypename='CHAR')  SORTABLE,
+        p_channel_dmail = 'P_CHANNEL_DMAIL' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='1', sourcetypeid='1', sourcetypename='CHAR')  SORTABLE,
+        p_channel_email = 'P_CHANNEL_EMAIL' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='1', sourcetypeid='1', sourcetypename='CHAR')  SORTABLE,
+        p_channel_catalog = 'P_CHANNEL_CATALOG' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='1', sourcetypeid='1', sourcetypename='CHAR')  SORTABLE,
+        p_channel_tv = 'P_CHANNEL_TV' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='1', sourcetypeid='1', sourcetypename='CHAR')  SORTABLE,
+        p_channel_radio = 'P_CHANNEL_RADIO' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='1', sourcetypeid='1', sourcetypename='CHAR')  SORTABLE,
+        p_channel_press = 'P_CHANNEL_PRESS' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='1', sourcetypeid='1', sourcetypename='CHAR')  SORTABLE,
+        p_channel_event = 'P_CHANNEL_EVENT' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='1', sourcetypeid='1', sourcetypename='CHAR')  SORTABLE,
+        p_channel_demo = 'P_CHANNEL_DEMO' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='1', sourcetypeid='1', sourcetypename='CHAR')  SORTABLE,
+        p_channel_details = 'P_CHANNEL_DETAILS' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='100', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        p_purpose = 'P_PURPOSE' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='15', sourcetypeid='1', sourcetypename='CHAR')  SORTABLE,
+        p_discount_active = 'P_DISCOUNT_ACTIVE' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='1', sourcetypeid='1', sourcetypename='CHAR')  SORTABLE
+    )
+    CONSTRAINT 'SYS_C008366' PRIMARY KEY ( 'P_PROMO_SK' )
+    CONSTRAINT 'P_END_DATE' FOREIGN KEY ( 'P_END_DATE_SK' ) 
+    REFERENCES 'EDW_TPCDS'.'DATE_DIM'( 'D_DATE_SK' )  ON DELETE RESTRICT NOT DEFERRABLE 
+    CONSTRAINT 'P_START_DATE' FOREIGN KEY ( 'P_START_DATE_SK' ) 
+    REFERENCES 'EDW_TPCDS'.'DATE_DIM'( 'D_DATE_SK' )  ON DELETE RESTRICT NOT DEFERRABLE 
+    CONSTRAINT 'P_I' FOREIGN KEY ( 'P_ITEM_SK' ) 
+    REFERENCES 'EDW_TPCDS'.'ITEM'( 'I_ITEM_SK' )  ON DELETE RESTRICT NOT DEFERRABLE 
+    INDEX 'SYS_C008366' CLUSTER UNIQUE PRIMARY ( 'P_PROMO_SK' );
+
+CREATE OR REPLACE TABLE bv_promotion I18N us_pst (
+        p_promo_sk:decimal (notnull, sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '38'),
+        p_promo_id:text (notnull, sourcetypeid = '1', sourcetyperadix = '10', sourcetypesize = '16'),
+        p_start_date_sk:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '38'),
+        p_end_date_sk:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '38'),
+        p_item_sk:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '38'),
+        p_cost:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '2', sourcetypesize = '15'),
+        p_response_target:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '38'),
+        p_promo_name:text (sourcetypeid = '1', sourcetyperadix = '10', sourcetypesize = '50'),
+        p_channel_dmail:text (sourcetypeid = '1', sourcetyperadix = '10', sourcetypesize = '1'),
+        p_channel_email:text (sourcetypeid = '1', sourcetyperadix = '10', sourcetypesize = '1'),
+        p_channel_catalog:text (sourcetypeid = '1', sourcetyperadix = '10', sourcetypesize = '1'),
+        p_channel_tv:text (sourcetypeid = '1', sourcetyperadix = '10', sourcetypesize = '1'),
+        p_channel_radio:text (sourcetypeid = '1', sourcetyperadix = '10', sourcetypesize = '1'),
+        p_channel_press:text (sourcetypeid = '1', sourcetyperadix = '10', sourcetypesize = '1'),
+        p_channel_event:text (sourcetypeid = '1', sourcetyperadix = '10', sourcetypesize = '1'),
+        p_channel_demo:text (sourcetypeid = '1', sourcetyperadix = '10', sourcetypesize = '1'),
+        p_channel_details:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '100'),
+        p_purpose:text (sourcetypeid = '1', sourcetyperadix = '10', sourcetypesize = '15'),
+        p_discount_active:text (sourcetypeid = '1', sourcetyperadix = '10', sourcetypesize = '1')
+    )
+    FOLDER = '/01 - connectivity layer/02 - base views/dv_demo'
+    CONSTRAINT 'SYS_C008366' PRIMARY KEY ( 'p_promo_sk' )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_promotion(
+        I18N us_pst
+        CONSTRAINTS (
+             ADD p_promo_sk (any) OPT ANY
+             ADD p_promo_id (any) OPT ANY
+             ADD p_start_date_sk (any) OPT ANY
+             ADD p_end_date_sk (any) OPT ANY
+             ADD p_item_sk (any) OPT ANY
+             ADD p_cost (any) OPT ANY
+             ADD p_response_target (any) OPT ANY
+             ADD p_promo_name (any) OPT ANY
+             ADD p_channel_dmail (any) OPT ANY
+             ADD p_channel_email (any) OPT ANY
+             ADD p_channel_catalog (any) OPT ANY
+             ADD p_channel_tv (any) OPT ANY
+             ADD p_channel_radio (any) OPT ANY
+             ADD p_channel_press (any) OPT ANY
+             ADD p_channel_event (any) OPT ANY
+             ADD p_channel_demo (any) OPT ANY
+             ADD p_channel_details (any) OPT ANY
+             ADD p_purpose (any) OPT ANY
+             ADD p_discount_active (any) OPT ANY
+        )
+        OUTPUTLIST (p_channel_catalog, p_channel_demo, p_channel_details, p_channel_dmail, p_channel_email, p_channel_event, p_channel_press, p_channel_radio, p_channel_tv, p_cost, p_discount_active, p_end_date_sk, p_item_sk, p_promo_id, p_promo_name, p_promo_sk, p_purpose, p_response_target, p_start_date_sk
+        )
+        WRAPPER (jdbc bv_promotion)
+    );
+

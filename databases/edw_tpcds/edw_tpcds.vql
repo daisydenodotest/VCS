@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE DATABASE edw_tpcds '';
+
+ALTER DATABASE edw_tpcds
+  CHARSET RESTRICTED;
+

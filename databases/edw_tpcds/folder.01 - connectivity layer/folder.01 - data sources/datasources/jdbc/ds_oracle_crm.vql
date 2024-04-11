@@ -1,0 +1,35 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE DATASOURCE JDBC ds_oracle_crm
+    FOLDER = '/01 - connectivity layer/01 - data sources'
+    DRIVERCLASSNAME = 'oracle.jdbc.OracleDriver'
+    DATABASEURI = '${databases.edw_tpcds.folder.01 - connectivity layer.folder.01 - data sources.datasources.jdbc.ds_oracle_crm.DATABASEURI}'
+    USERNAME = '${databases.edw_tpcds.folder.01 - connectivity layer.folder.01 - data sources.datasources.jdbc.ds_oracle_crm.USERNAME}'
+    USERPASSWORD = '${databases.edw_tpcds.folder.01 - connectivity layer.folder.01 - data sources.datasources.jdbc.ds_oracle_crm.USERPASSWORD}' ${databases.edw_tpcds.folder.01 - connectivity layer.folder.01 - data sources.datasources.jdbc.ds_oracle_crm.USERPASSWORD.ENCRYPTED}
+    CLASSPATH = 'oracle-21c'
+    DATABASENAME = 'oracle'
+    DATABASEVERSION = '19c'
+    FETCHSIZE = 1000
+    VALIDATIONQUERY = 'SELECT COUNT(*) FROM SYS.DUAL'
+    INITIALSIZE = 4
+    MAXIDLE = -1
+    MINIDLE = 0
+    MAXACTIVE = 20
+    EXHAUSTEDACTION = 1
+    TESTONBORROW = true
+    TESTONRETURN = false
+    TESTWHILEIDLE = false
+    TIMEBETWEENEVICTION = -1
+    NUMTESTPEREVICTION = 3
+    MINEVICTABLETIME = 1800000
+    POOLPREPAREDSTATEMENTS = false
+    MAXOPENPREPAREDSTATEMENTS = -1
+    PROPERTIES ('remarksReporting'='false', 'includeSynonyms'='false')
+    DATA_LOAD_CONFIGURATION (
+        BATCHINSERTSIZE = 200
+    )
+    SOURCECONFIGURATION (
+        multiblockreadcount = 8,
+        delegatescalarfunctionslist = (abs, acos, addday, addhour, addminute, addmonth, addsecond, addweek, addyear, ascii, asin, atan, atan2, case, cast, ceil, char, coalesce, concat, cos, cot, current_date, degrees, div, exp, firstdayofmonth, firstdayofweek, floor, getday, getdayofweek, getdayofyear, getdaysbetween, gethour, getmicrosecond, getmillisecond, getminute, getmonth, getmonthsbetween, getnanosecond, getsecond, getyear, instr, lastdayofmonth, lastdayofweek, len, ln, log, lower, ltrim, mod, mult, nextweekday, now, nullif, pi, position, pow, power, previousweekday, radians, rand, removeaccents, repeat, replace, round, rtrim, sign, sin, sqrt, substr, substring, subtract, sum, tan, textcat, textconstant, to_date(literal), to_localdate(literal), to_time(literal), to_timestamp(literal), to_timestamptz(literal), trim, trunc, upper, xmlquery, xpath),
+        delegateanalyticfunctionslist = (avg, cume_dist, dense_rank, first_value, lag, last_value, lead, max, min, ntile, percent_rank, percentile_cont, percentile_disc, rank, row_number, sum)
+    );
+
