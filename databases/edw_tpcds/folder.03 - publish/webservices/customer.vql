@@ -35,5 +35,5 @@
         ALLOW_CORS_ORIGINS (*) DISABLED
         PROCESS_FUNCTIONS_IN_SELECT_PARAMETER = true ) 
     OPENAPI2 ( API_VERSION = '1.0.0' ) 
-    FOLDER = '/01 - connectivity layer/02 - base views/dv_demo';
+    FOLDER = '/03 - publish';
 

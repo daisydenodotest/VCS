@@ -1,4 +1,5 @@
-﻿/databases/edw_tpcds/folder.01 - connectivity layer/01 - connectivity layer.vql
+﻿/databases/edw_tpcds/folder.03 - publish/03 - publish.vql
+/databases/edw_tpcds/folder.01 - connectivity layer/01 - connectivity layer.vql
 /databases/edw_tpcds/folder.01 - connectivity layer/folder.02 - base views/02 - base views.vql
 /databases/edw_tpcds/folder.01 - connectivity layer/folder.02 - base views/folder.dv_demo/dv_demo.vql
 /databases/edw_tpcds/folder.01 - connectivity layer/folder.01 - data sources/01 - data sources.vql
