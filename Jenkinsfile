@@ -4,6 +4,9 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+
+                bat 'rmdir /S /Q C:\Program Files\Jenkins\workspace\github_diff_1'
+                
                 // 拉取 GitHub 上的代码
                 bat 'git clone https://github.com/daisydenodotest/VCS.git .'
             }
