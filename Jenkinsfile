@@ -1,38 +1,22 @@
 pipeline {
     agent any
     
-    parameters {
-        string(name: 'BRANCH', defaultValue: 'main', description: 'Branch to compare')
-    }
-    
     stages {
         stage('Checkout') {
             steps {
-                // 拉取指定分支的代碼
-                checkout([$class: 'GitSCM', branches: [[name: '*/' + params.BRANCH]], userRemoteConfigs: [[url: 'https://github.com/daisydenodotest/VCS.git']]])
+                // 拉取 GitHub 上的代碼
+                git credentialsId: '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', url: 'https://github.com/daisydenodotest/VCS.git'
             }
         }
         
-        stage('Generate Diff') {
+        stage('Compare Versions') {
             steps {
-                // 生成差異文件
+                // 比較不同版本之間的差異並輸出到日誌
                 script {
-                    def previousCommit = bat(script: 'git rev-parse HEAD^1', returnStdout: true).trim()
-                    def currentCommit = bat(script: 'git rev-parse HEAD', returnStdout: true).trim()
-                    
-                    echo "Previous commit: $previousCommit"
-                    echo "Current commit: $currentCommit"
-                    echo "git diff $previousCommit $currentCommit > diff.txt"
-                    
-                    bat "git diff $previousCommit $currentCommit > diff.txt"
+                    def diffOutput = sh(script: 'git log -p -1', returnStdout: true).trim()
+                    echo "版本差異內容："
+                    echo diffOutput
                 }
-            }
-        }
-        
-        stage('Save Diff File') {
-            steps {
-                // 將差異文件保存到指定位置
-                archiveArtifacts artifacts: 'diff.txt', onlyIfSuccessful: true
             }
         }
     }
