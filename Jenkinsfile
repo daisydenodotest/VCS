@@ -22,6 +22,7 @@ pipeline {
                     
                     echo "Previous commit: $previousCommit"
                     echo "Current commit: $currentCommit"
+                    echo "git diff $previousCommit $currentCommit > diff.txt"
                     
                     bat "git diff $previousCommit $currentCommit > diff.txt"
                 }
