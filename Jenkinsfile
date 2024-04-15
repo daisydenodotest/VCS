@@ -13,8 +13,8 @@ pipeline {
                     
                     def diffOutput = bat(script: 'powershell -command "git diff ${previousCommit} ${currentCommit}"', returnStdout: true).trim()
 
-                    //echo "diff content："
-                    //echo diffOutput
+                    echo "diff content："
+                    echo diffOutput
                 }
             }
         }
