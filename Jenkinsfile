@@ -4,18 +4,18 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // 拉取 GitHub 上的代碼
-                git credentialsId: 'jenkins_trigger_github', url: 'https://github.com/daisydenodotest/VCS.git'
+                // 拉取 GitHub 上的代码
+                bat 'git clone https://github.com/daisydenodotest/VCS.git'
             }
         }
         
-        stage('Compare Versions') {
+        stage('Generate Diff') {
             steps {
-                // 比較不同版本之間的差異並輸出到日誌
+                // 生成差异文件
                 script {
-                    def diffOutput = sh(script: 'git log -p -1', returnStdout: true).trim()
-                    echo "版本差異內容："
-                    echo diffOutput
+                    def previousCommit = bat(script: 'git rev-parse HEAD^', returnStdout: true).trim()
+                    def currentCommit = bat(script: 'git rev-parse HEAD', returnStdout: true).trim()
+                    bat "git diff ${previousCommit} ${currentCommit} > diff.txt"
                 }
             }
         }
