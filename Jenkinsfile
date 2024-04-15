@@ -11,9 +11,8 @@ pipeline {
                     echo currentCommit
                     echo previousCommit
 
-                    def command = "powershell -command \"git diff \" + previousCommit + \" \" + currentCommit"
+                    def command = "powershell -command \"git diff ${previousCommit} ${currentCommit}\""
                     def diffOutput = bat(script: command, returnStdout: true)
-
 
                     echo "diff content："
                     echo diffOutput
