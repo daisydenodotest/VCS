@@ -5,6 +5,8 @@ pipeline {
         stage('Get Diff') {
             steps {
                 script {
+
+                    dir('C:\Program Files\Jenkins') 
                     def currentCommit = bat(script: 'powershell -command \"git rev-parse HEAD\"', returnStdout: true).trim()
                     def previousCommit = bat(script: 'powershell -command \"git rev-parse HEAD^\"', returnStdout: true).trim()
 
