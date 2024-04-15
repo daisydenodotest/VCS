@@ -17,8 +17,8 @@ pipeline {
             steps {
                 // 生成差異文件
                 script {
-                    def previousCommit = sh(script: 'git rev-parse HEAD^', returnStdout: true).trim()
-                    def currentCommit = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
+                    def previousCommit = bat(script: 'git rev-parse HEAD^', returnStdout: true).trim()
+                    def currentCommit = bat(script: 'git rev-parse HEAD', returnStdout: true).trim()
                     
                     echo "Previous commit: $previousCommit"
                     echo "Current commit: $currentCommit"
