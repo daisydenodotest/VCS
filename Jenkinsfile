@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // 拉取 GitHub 上的代碼
-                git credentialsId: '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', url: 'https://github.com/daisydenodotest/VCS.git'
+                git credentialsId: 'jenkins_trigger_github', url: 'https://github.com/daisydenodotest/VCS.git'
             }
         }
         
