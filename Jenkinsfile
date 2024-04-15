@@ -3,9 +3,10 @@ pipeline {
     
     stages {
         stage('Checkout') {
-            steps {                
+            steps {     
+                bat 'rmdir /S /Q .'
                 // 拉取 GitHub 上的代码
-                bat 'git clone https://github.com/daisydenodotest/VCS.git .'
+                bat 'git clone https://github.com/daisydenodotest/VCS.git'
             }
         }
         
