@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // 拉取 GitHub 上的代码
-                bat 'git clone https://github.com/daisydenodotest/VCS.git'
+                bat 'git clone --force https://github.com/daisydenodotest/VCS.git'
             }
         }
         
