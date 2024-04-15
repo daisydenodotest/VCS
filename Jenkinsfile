@@ -15,7 +15,9 @@ pipeline {
                 script {
                     def previousCommit = bat(script: 'git rev-parse HEAD^', returnStdout: true).trim()
                     def currentCommit = bat(script: 'git rev-parse HEAD', returnStdout: true).trim()
-                    bat "git diff ${previousCommit} ${currentCommit} > diff.txt"
+                    def diffOutput = bat(script: "git diff ${previousCommit} ${currentCommit}", returnStdout: true).trim()
+                    echo "差異內容："
+                    echo diffOutput
                 }
             }
         }
