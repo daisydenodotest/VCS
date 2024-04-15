@@ -19,6 +19,10 @@ pipeline {
                 script {
                     def previousCommit = sh(script: 'git rev-parse HEAD^', returnStdout: true).trim()
                     def currentCommit = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
+                    
+                    echo "Previous commit: $previousCommit"
+                    echo "Current commit: $currentCommit"
+                    
                     sh "git diff $previousCommit $currentCommit > diff.txt"
                 }
             }
