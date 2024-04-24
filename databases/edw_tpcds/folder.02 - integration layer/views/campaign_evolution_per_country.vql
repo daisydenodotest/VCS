@@ -9,11 +9,10 @@ WHERE (date_dim.d_year = 2002 AND marketing_service.p_promo_sk = 1)
 GROUP BY customer.c_birth_country, marketing_service.p_promo_name, date_dim.d_moy 
 ORDER BY country DESC;'  (
     country (description = 'Country where the customer was born'),
-    total (description = 'Total sales for a country and month. For this analysis, we are using the "net paid" amount, that does not include taxes. This value comes from our EDW  總銷售金額'),
     month (description = 'Month of the year, from 1 to 12'),
     promo_name (description = 'Internal name of our Marketing promotions')
  )
- AS SELECT customer.c_birth_country AS country, marketing_service.p_promo_name AS promo_name, date_dim.d_moy AS month, sum((store_sales.ss_net_paid*store_sales.ss_quantity)) AS total FROM ((store_sales AS store_sales INNER JOIN bv_customer AS customer ON store_sales.ss_customer_sk = customer.c_customer_sk ) INNER JOIN bv_marketing_service AS marketing_service ON store_sales.ss_promo_sk = marketing_service.p_promo_sk ) INNER JOIN date_dim AS date_dim ON store_sales.ss_sold_date_sk = date_dim.d_date_sk  WHERE (date_dim.d_year = 2002 AND marketing_service.p_promo_sk = 1) GROUP BY customer.c_birth_country, marketing_service.p_promo_name, date_dim.d_moy ORDER BY country DESC CONTEXT ('I18N' = 'us_cst');
+ AS SELECT customer.c_birth_country AS country, marketing_service.p_promo_name AS promo_name, date_dim.d_moy AS month FROM ((store_sales AS store_sales INNER JOIN bv_customer AS customer ON store_sales.ss_customer_sk = customer.c_customer_sk ) INNER JOIN bv_marketing_service AS marketing_service ON store_sales.ss_promo_sk = marketing_service.p_promo_sk ) INNER JOIN date_dim AS date_dim ON store_sales.ss_sold_date_sk = date_dim.d_date_sk  WHERE (date_dim.d_year = 2002 AND marketing_service.p_promo_sk = 1) GROUP BY customer.c_birth_country, marketing_service.p_promo_name, date_dim.d_moy ORDER BY country DESC CONTEXT ('I18N' = 'us_cst');
 
 ALTER VIEW campaign_evolution_per_country
  LAYOUT (store_sales = [130, 20, 200, 225], bv_customer = [918, 469, 200, 225], bv_marketing_service = [170, 510, 200, 225], date_dim = [976, 13, 200, 225]);
