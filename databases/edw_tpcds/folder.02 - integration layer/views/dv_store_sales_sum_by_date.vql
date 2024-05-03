@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW dv_store_sales_sum_by_date FOLDER = '/02 - integration layer' AS SELECT bv_store_sales.ss_sold_date_sk AS ss_sold_date_sk, sum(ss_ext_sales_price) OVER ( PARTITION BY ss_sold_date_sk ) AS sale_prices_by_dt FROM bv_store_sales;
+
+ALTER VIEW dv_store_sales_sum_by_date
+ LAYOUT (bv_store_sales = [20, 20, 275, 105]);
+

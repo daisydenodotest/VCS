@@ -1,0 +1,6 @@
+﻿/databases/edw_tpcds/folder.02 - integration layer/02 - integration layer.vql
+/databases/edw_tpcds/folder.01 - connectivity layer/01 - connectivity layer.vql
+/databases/edw_tpcds/folder.01 - connectivity layer/folder.02 - base views/02 - base views.vql
+/databases/edw_tpcds/folder.01 - connectivity layer/folder.01 - data sources/01 - data sources.vql
+/databases/edw_tpcds/folder.01 - connectivity layer/folder.01 - data sources/datasources/jdbc/ds_oracle_crm.vql
+/databases/edw_tpcds/folder.01 - connectivity layer/folder.02 - base views/views/bv_store_sales.vql

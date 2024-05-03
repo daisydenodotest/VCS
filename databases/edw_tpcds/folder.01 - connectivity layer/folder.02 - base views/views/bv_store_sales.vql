@@ -1,0 +1,113 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC bv_store_sales
+    FOLDER = '/01 - connectivity layer/02 - base views'
+    DATASOURCENAME=ds_oracle_crm
+    SCHEMANAME='${databases.edw_tpcds.folder.01 - connectivity layer.folder.02 - base views.views.jdbc.bv_store_sales.SCHEMANAME}' 
+    RELATIONNAME='STORE_SALES' 
+    OUTPUTSCHEMA (
+        ss_sold_date_sk = 'SS_SOLD_DATE_SK' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='38', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        ss_sold_time_sk = 'SS_SOLD_TIME_SK' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='38', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        ss_item_sk = 'SS_ITEM_SK' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='38', sourcetypeid='2', sourcetypename='NUMBER')  NOT NULL SORTABLE,
+        ss_customer_sk = 'SS_CUSTOMER_SK' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='38', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        ss_cdemo_sk = 'SS_CDEMO_SK' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='38', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        ss_hdemo_sk = 'SS_HDEMO_SK' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='38', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        ss_addr_sk = 'SS_ADDR_SK' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='38', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        ss_store_sk = 'SS_STORE_SK' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='38', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        ss_promo_sk = 'SS_PROMO_SK' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='38', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        ss_ticket_number = 'SS_TICKET_NUMBER' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='38', sourcetypeid='2', sourcetypename='NUMBER')  NOT NULL SORTABLE,
+        ss_quantity = 'SS_QUANTITY' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='38', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        ss_wholesale_cost = 'SS_WHOLESALE_COST' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='2', sourcetyperadix='10', sourcetypesize='7', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        ss_list_price = 'SS_LIST_PRICE' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='2', sourcetyperadix='10', sourcetypesize='7', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        ss_sales_price = 'SS_SALES_PRICE' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='2', sourcetyperadix='10', sourcetypesize='7', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        ss_ext_discount_amt = 'SS_EXT_DISCOUNT_AMT' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='2', sourcetyperadix='10', sourcetypesize='7', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        ss_ext_sales_price = 'SS_EXT_SALES_PRICE' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='2', sourcetyperadix='10', sourcetypesize='7', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        ss_ext_wholesale_cost = 'SS_EXT_WHOLESALE_COST' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='2', sourcetyperadix='10', sourcetypesize='7', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        ss_ext_list_price = 'SS_EXT_LIST_PRICE' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='2', sourcetyperadix='10', sourcetypesize='7', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        ss_ext_tax = 'SS_EXT_TAX' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='2', sourcetyperadix='10', sourcetypesize='7', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        ss_coupon_amt = 'SS_COUPON_AMT' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='2', sourcetyperadix='10', sourcetypesize='7', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        ss_net_paid = 'SS_NET_PAID' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='2', sourcetyperadix='10', sourcetypesize='7', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        ss_net_paid_inc_tax = 'SS_NET_PAID_INC_TAX' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='2', sourcetyperadix='10', sourcetypesize='7', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        ss_net_profit = 'SS_NET_PROFIT' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='2', sourcetyperadix='10', sourcetypesize='7', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE
+    )
+    CONSTRAINT 'SYS_C008378' PRIMARY KEY ( 'SS_ITEM_SK' , 'SS_TICKET_NUMBER' )
+    CONSTRAINT 'SS_C' FOREIGN KEY ( 'SS_CUSTOMER_SK' ) 
+    REFERENCES 'EDW_TPCDS'.'CUSTOMER'( 'C_CUSTOMER_SK' )  ON DELETE RESTRICT NOT DEFERRABLE 
+    CONSTRAINT 'SS_A' FOREIGN KEY ( 'SS_ADDR_SK' ) 
+    REFERENCES 'EDW_TPCDS'.'CUSTOMER_ADDRESS'( 'CA_ADDRESS_SK' )  ON DELETE RESTRICT NOT DEFERRABLE 
+    CONSTRAINT 'SS_CD' FOREIGN KEY ( 'SS_CDEMO_SK' ) 
+    REFERENCES 'EDW_TPCDS'.'CUSTOMER_DEMOGRAPHICS'( 'CD_DEMO_SK' )  ON DELETE RESTRICT NOT DEFERRABLE 
+    CONSTRAINT 'SS_D' FOREIGN KEY ( 'SS_SOLD_DATE_SK' ) 
+    REFERENCES 'EDW_TPCDS'.'DATE_DIM'( 'D_DATE_SK' )  ON DELETE RESTRICT NOT DEFERRABLE 
+    CONSTRAINT 'SS_HD' FOREIGN KEY ( 'SS_HDEMO_SK' ) 
+    REFERENCES 'EDW_TPCDS'.'HOUSEHOLD_DEMOGRAPHICS'( 'HD_DEMO_SK' )  ON DELETE RESTRICT NOT DEFERRABLE 
+    CONSTRAINT 'SS_I' FOREIGN KEY ( 'SS_ITEM_SK' ) 
+    REFERENCES 'EDW_TPCDS'.'ITEM'( 'I_ITEM_SK' )  ON DELETE RESTRICT NOT DEFERRABLE 
+    CONSTRAINT 'SS_P' FOREIGN KEY ( 'SS_PROMO_SK' ) 
+    REFERENCES 'EDW_TPCDS'.'PROMOTION'( 'P_PROMO_SK' )  ON DELETE RESTRICT NOT DEFERRABLE 
+    CONSTRAINT 'SS_S' FOREIGN KEY ( 'SS_STORE_SK' ) 
+    REFERENCES 'EDW_TPCDS'.'STORE'( 'S_STORE_SK' )  ON DELETE RESTRICT NOT DEFERRABLE 
+    CONSTRAINT 'SS_T' FOREIGN KEY ( 'SS_SOLD_TIME_SK' ) 
+    REFERENCES 'EDW_TPCDS'.'TIME_DIM'( 'T_TIME_SK' )  ON DELETE RESTRICT NOT DEFERRABLE 
+    INDEX 'SYS_C008378' CLUSTER UNIQUE PRIMARY ( 'SS_ITEM_SK' , 'SS_TICKET_NUMBER' );
+
+CREATE OR REPLACE TABLE bv_store_sales I18N us_pst (
+        ss_sold_date_sk:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '38'),
+        ss_sold_time_sk:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '38'),
+        ss_item_sk:decimal (notnull, sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '38'),
+        ss_customer_sk:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '38'),
+        ss_cdemo_sk:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '38'),
+        ss_hdemo_sk:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '38'),
+        ss_addr_sk:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '38'),
+        ss_store_sk:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '38'),
+        ss_promo_sk:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '38'),
+        ss_ticket_number:decimal (notnull, sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '38'),
+        ss_quantity:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '38'),
+        ss_wholesale_cost:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '2', sourcetypesize = '7'),
+        ss_list_price:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '2', sourcetypesize = '7'),
+        ss_sales_price:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '2', sourcetypesize = '7'),
+        ss_ext_discount_amt:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '2', sourcetypesize = '7'),
+        ss_ext_sales_price:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '2', sourcetypesize = '7'),
+        ss_ext_wholesale_cost:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '2', sourcetypesize = '7'),
+        ss_ext_list_price:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '2', sourcetypesize = '7'),
+        ss_ext_tax:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '2', sourcetypesize = '7'),
+        ss_coupon_amt:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '2', sourcetypesize = '7'),
+        ss_net_paid:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '2', sourcetypesize = '7'),
+        ss_net_paid_inc_tax:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '2', sourcetypesize = '7'),
+        ss_net_profit:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '2', sourcetypesize = '7')
+    )
+    FOLDER = '/01 - connectivity layer/02 - base views'
+    CONSTRAINT 'SYS_C008378' PRIMARY KEY ( 'ss_item_sk' , 'ss_ticket_number' )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_store_sales(
+        I18N us_pst
+        CONSTRAINTS (
+             ADD ss_sold_date_sk (any) OPT ANY
+             ADD ss_sold_time_sk (any) OPT ANY
+             ADD ss_item_sk (any) OPT ANY
+             ADD ss_customer_sk (any) OPT ANY
+             ADD ss_cdemo_sk (any) OPT ANY
+             ADD ss_hdemo_sk (any) OPT ANY
+             ADD ss_addr_sk (any) OPT ANY
+             ADD ss_store_sk (any) OPT ANY
+             ADD ss_promo_sk (any) OPT ANY
+             ADD ss_ticket_number (any) OPT ANY
+             ADD ss_quantity (any) OPT ANY
+             ADD ss_wholesale_cost (any) OPT ANY
+             ADD ss_list_price (any) OPT ANY
+             ADD ss_sales_price (any) OPT ANY
+             ADD ss_ext_discount_amt (any) OPT ANY
+             ADD ss_ext_sales_price (any) OPT ANY
+             ADD ss_ext_wholesale_cost (any) OPT ANY
+             ADD ss_ext_list_price (any) OPT ANY
+             ADD ss_ext_tax (any) OPT ANY
+             ADD ss_coupon_amt (any) OPT ANY
+             ADD ss_net_paid (any) OPT ANY
+             ADD ss_net_paid_inc_tax (any) OPT ANY
+             ADD ss_net_profit (any) OPT ANY
+        )
+        OUTPUTLIST (ss_addr_sk, ss_cdemo_sk, ss_coupon_amt, ss_customer_sk, ss_ext_discount_amt, ss_ext_list_price, ss_ext_sales_price, ss_ext_tax, ss_ext_wholesale_cost, ss_hdemo_sk, ss_item_sk, ss_list_price, ss_net_paid, ss_net_paid_inc_tax, ss_net_profit, ss_promo_sk, ss_quantity, ss_sales_price, ss_sold_date_sk, ss_sold_time_sk, ss_store_sk, ss_ticket_number, ss_wholesale_cost
+        )
+        WRAPPER (jdbc bv_store_sales)
+    );
+
