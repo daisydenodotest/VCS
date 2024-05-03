@@ -5,7 +5,7 @@ CREATE OR REPLACE DATASOURCE JDBC ds_oracle_crm
     DATABASEURI = '${databases.edw_tpcds.folder.01 - connectivity layer.folder.01 - data sources.datasources.jdbc.ds_oracle_crm.DATABASEURI}'
     USERNAME = '${databases.edw_tpcds.folder.01 - connectivity layer.folder.01 - data sources.datasources.jdbc.ds_oracle_crm.USERNAME}'
     USERPASSWORD = '${databases.edw_tpcds.folder.01 - connectivity layer.folder.01 - data sources.datasources.jdbc.ds_oracle_crm.USERPASSWORD}' ${databases.edw_tpcds.folder.01 - connectivity layer.folder.01 - data sources.datasources.jdbc.ds_oracle_crm.USERPASSWORD.ENCRYPTED}
-    CLASSPATH = 'oracle-21c'
+    CLASSPATH = ''
     DATABASENAME = 'oracle'
     DATABASEVERSION = '19c'
     FETCHSIZE = 1000
